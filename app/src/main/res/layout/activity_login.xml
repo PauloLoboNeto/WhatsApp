@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="whatsappandroid.com.br.whatsapp.activity.LoginActivity"
+    android:background="?attr/colorPrimary">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/largura_logo"
+        android:layout_height="@dimen/altura_logo"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="36dp"
+        android:layout_marginBottom="28dp"
+        android:layout_above="@+id/edit_nome"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/edit_nome"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Digite seu nome"
+        android:inputType="textPersonName"
+        android:textColor="@color/textColorPrimary"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="253dp"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/edit_codigo_internacional"
+        android:layout_alignStart="@+id/edit_codigo_internacional" />
+
+    <EditText
+        android:id="@+id/edit_codigo_internacional"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="+55"
+        android:inputType="phone"
+        android:textColor="@color/textColorPrimary"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="312dp"
+        android:layout_alignBaseline="@+id/edit_telefone"
+        android:layout_alignBottom="@+id/edit_telefone"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp" />
+
+    <EditText
+        android:id="@+id/edit_codigo_estadual"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="11"
+        android:inputType="phone"
+        android:textColor="@color/textColorPrimary"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="312dp"
+        android:layout_above="@+id/button_cadastrar"
+        android:layout_toRightOf="@+id/edit_codigo_internacional"
+        android:layout_toEndOf="@+id/edit_codigo_internacional" />
+
+    <EditText
+        android:id="@+id/edit_telefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_nome"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/edit_codigo_estadual"
+        android:ems="10"
+        android:hint="999999999"
+        android:inputType="phone"
+        android:textColor="@color/textColorPrimary"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="312dp"
+        android:layout_alignRight="@+id/edit_nome"
+        android:layout_alignEnd="@+id/edit_nome" />
+
+    <Button
+        android:id="@+id/button_cadastrar"
+        android:layout_width="368dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        android:text="@string/botao_cadastrar"
+        android:textColor="@color/textColorPrimary"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="402dp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/edit_codigo_internacional"
+        android:layout_centerHorizontal="true" />
+</android.widget.RelativeLayout>
