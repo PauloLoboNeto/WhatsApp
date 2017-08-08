@@ -40,7 +40,6 @@
         android:gravity="center"
         android:text="Você recebeu um SMS para validação do seu número, digite o código de validação abaixo:"
         android:textColor="@color/textColorPrimary"
-        android:layout_bellow="@+id/texteView2"
         android:layout_below="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -49,24 +48,25 @@
         android:id="@+id/edit_codigo_validacao"
         android:layout_width="128dp"
         android:layout_height="39dp"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Código"
         android:inputType="number"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/textColorPrimary"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/button_validar"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_codigo_validacao"
         android:background="?attr/colorPrimaryDark"
         android:text="Validar"
-        android:textColor="@color/textColorPrimary" />
+        android:textColor="@color/textColorPrimary"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/edit_codigo_validacao"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </android.widget.RelativeLayout>

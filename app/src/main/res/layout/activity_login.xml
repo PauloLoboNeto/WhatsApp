@@ -71,17 +71,17 @@
         android:id="@+id/edit_telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/edit_nome"
+        android:layout_alignRight="@+id/edit_nome"
         android:layout_below="@+id/edit_nome"
         android:layout_marginTop="14dp"
         android:layout_toRightOf="@+id/edit_codigo_estadual"
         android:ems="10"
-        android:hint="999999999"
+        android:hint="9 9999-9999"
         android:inputType="phone"
         android:textColor="@color/textColorPrimary"
         tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="312dp"
-        android:layout_alignRight="@+id/edit_nome"
-        android:layout_alignEnd="@+id/edit_nome" />
+        tools:layout_editor_absoluteY="312dp" />
 
     <Button
         android:id="@+id/button_cadastrar"
