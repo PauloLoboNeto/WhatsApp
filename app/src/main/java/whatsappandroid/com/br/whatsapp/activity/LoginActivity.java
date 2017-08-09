@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -77,15 +78,36 @@ public class LoginActivity extends AppCompatActivity {
                 **Farei essa atualização quando eu integrar o WhatsMobile com o Web.**/
                 randomToken = random.nextInt(9999 - 1000) + 1000;
                 token = String.valueOf(randomToken);
+                String mensagemEnvio = "Whatsapp! Código de confirmação: " + token;
+
+
+                //Salvar os dados para validação
                 Preferences preferences = new Preferences(LoginActivity.this);
                 preferences.salvarPreferences(nomeUsuario, telefoneSemFormatacao, token);
 
-                HashMap<String, String> usuario = preferences.getDadosUsuario();
-                Log.i("TOKEN", "T:" + usuario.get("token") + "Nome:" + usuario.get("nomeUsuario") +
-                                                           "Telefone:" + usuario.get("telefone"));
+
+              //EnviaSMS
+               telefoneSemFormatacao = "5554";
+               boolean enviadoSMS = enviaSMS("+" + telefoneSemFormatacao, mensagemEnvio);
+
             }
         });
     }
+
+    //Envio de SMS
+    //TODO: REALIZAR ATUALIZAÇÃO PARA ENVIO DE MENSAGENS A DISPOSITIVOS DE API >=23
+        private boolean enviaSMS(String telefone, String mensagem) {
+            try {
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage(telefone, null, mensagem, null, null);
+
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
 
 }
 
