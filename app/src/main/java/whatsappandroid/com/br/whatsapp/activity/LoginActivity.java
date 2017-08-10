@@ -1,8 +1,12 @@
 package whatsappandroid.com.br.whatsapp.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.SmsManager;
@@ -10,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -18,6 +23,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import whatsappandroid.com.br.whatsapp.R;
+import whatsappandroid.com.br.whatsapp.helper.Permissao;
 import whatsappandroid.com.br.whatsapp.helper.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,12 +33,16 @@ public class LoginActivity extends AppCompatActivity {
     private EditText codigoInternacional;
     private EditText codigoEstadual;
     private Button cadastrar;
-
+    private String[] permissoesNecessarias = new String[]{
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.INTERNET
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Permissao.validaPermissoes(1, this, permissoesNecessarias);
 
         nome = (EditText) findViewById(R.id.edit_nome);
         telefone = (EditText) findViewById(R.id.edit_telefone);
@@ -90,13 +100,21 @@ public class LoginActivity extends AppCompatActivity {
                telefoneSemFormatacao = "5554";
                boolean enviadoSMS = enviaSMS("+" + telefoneSemFormatacao, mensagemEnvio);
 
+                if(enviadoSMS) {
+                    Intent intent = new Intent(LoginActivity.this, ValidadorActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(LoginActivity.this, "Problema ao enviar o SMS, tente novamente!", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
     }
 
-    //Envio de SMS
-    //TODO: REALIZAR ATUALIZAÇÃO PARA ENVIO DE MENSAGENS A DISPOSITIVOS DE API >=23
-        private boolean enviaSMS(String telefone, String mensagem) {
+            //Envio de SMS
+            private boolean enviaSMS(String telefone, String mensagem) {
             try {
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(telefone, null, mensagem, null, null);
@@ -108,6 +126,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
+        public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults){
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            for(int resultado : grantResults){
+                if(resultado == getPackageManager().PERMISSION_DENIED){
+                    alertaValidacaoPermissao();
+                }
+            }
+        }
+
+        private void alertaValidacaoPermissao(){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Permissão foi negada");
+            builder.setMessage("Para utilizar o whatsapp, é necessário aceitar a permissão!");
+
+            builder.setPositiveButton("CONFIRMAR", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+        }
 
 }
 
